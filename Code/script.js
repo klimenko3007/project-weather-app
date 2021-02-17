@@ -133,17 +133,112 @@ const WEATHER_ICONS = [
     id: 531,
     link: 'http://openweathermap.org/img/wn/09d@2x.png'
   },
+  {
+    id: 601,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 602,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 611,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 612,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 613,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 615,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 616,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 620,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 621,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 622,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 700,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 701,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 711,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 721,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 731,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 741,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 751,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 761,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 762,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 771,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 781,
+    link: 'http://openweathermap.org/img/wn/50d@2x.png'
+  },
+  {
+    id: 800,
+    link: 'http://openweathermap.org/img/wn/01d@2x.png'
+  },
+  {
+    id: 801,
+    link: 'http://openweathermap.org/img/wn/02d@2x.png'
+  },
+  {
+    id: 802,
+    link: 'http://openweathermap.org/img/wn/03d@2x.png'
+  },
+  {
+    id: 803,
+    link: 'http://openweathermap.org/img/wn/04d@2x.png'
+  },
+  {
+    id: 804,
+    link: 'http://openweathermap.org/img/wn/04d@2x.png'
+  },
+  
 ]
-
-// Function that check the image ID
-const Image = (id) => {
-  WEATHER_ICONS.forEach((weather, i) =>{
-    const ICon = id;
-      if(ICon === WEATHER_ICONS[i].id) {
-    dayFive.innerHTML += ` Current: <img src=${WEATHER_ICONS[i].link}>`
-    }
-  })
-}
 
 const SthlmTemp = () => {
     fetch(OurAPI).then((response) => {
@@ -213,11 +308,21 @@ const SthlmTemp = () => {
         sunSet.innerHTML = `The Sunset is at ${dateSet} PM` 
 
 
-    for (let i = 0; i < dateFiveDays.length && i < temperatureFiveDays.length; i++) {
-        dayOne.innerHTML += `<dt>${dateFiveDays[i]}: ${temperatureFiveDays[i]} <img src="http://openweathermap.org/img/wn/11d@2x.png" width="40px" > </dt>`
-    }
+    // for (let i = 0; i < dateFiveDays.length && i < temperatureFiveDays.length; i++) {
+    //     dayOne.innerHTML += `<dt>${dateFiveDays[i]}: ${temperatureFiveDays[i]} <img src="http://openweathermap.org/img/wn/11d@2x.png" width="40px" > </dt>`
+    // }
+    
+    // Function that checks ID and adds an image
 
 
+    fiveDaysId.forEach((ID, index) => {
+      WEATHER_ICONS.forEach((weather, i) =>{
+        const ICon = ID;
+          if(ICon === WEATHER_ICONS[i].id) {
+            dayOne.innerHTML += `<dt>${dateFiveDays[index]}: ${temperatureFiveDays[index]}C <img src=${WEATHER_ICONS[i].link} width="40px" > </dt>`
+        }
+      })
+    })
 
 
         /*dayOne.innerHTML = `${newDateArray[1]}: ${Weather[1]} ℃`;
