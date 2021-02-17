@@ -18,27 +18,151 @@ const OurAPI = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Stockhol
 //http://api.openweathermap.org/data/2.5/forecast?q=Stockholm&units=metric&appid=3c8d0ca53cf60cf5802dc4c0325edd88
 
 // Global Variable
-let Weather
 
+const WEATHER_ICONS = [
+  {
+    id: 200,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 201,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 202,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 210,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 211,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 212,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 221,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 230,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 231,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 232,
+    link: 'http://openweathermap.org/img/wn/11d@2x.png'
+  },
+  {
+    id: 300,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 301,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },{
+    id: 302,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },{
+    id: 310,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },{
+    id: 311,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },{
+    id: 312,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },{
+    id: 313,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 314,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 321,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 500,
+    link: 'http://openweathermap.org/img/wn/10d@2x.png'
+  },
+  {
+    id: 501,
+    link: 'http://openweathermap.org/img/wn/10d@2x.png'
+  },
+  {
+    id: 502,
+    link: 'http://openweathermap.org/img/wn/10d@2x.png'
+  },
+  {
+    id: 503,
+    link: 'http://openweathermap.org/img/wn/10d@2x.png'
+  },
+  {
+    id: 504,
+    link: 'http://openweathermap.org/img/wn/10d@2x.png'
+  },
+  {
+    id: 511,
+    link: 'http://openweathermap.org/img/wn/13d@2x.png'
+  },
+  {
+    id: 520,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 521,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 522,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+  {
+    id: 531,
+    link: 'http://openweathermap.org/img/wn/09d@2x.png'
+  },
+]
+const Image = (id) => {
+  WEATHER_ICONS.forEach((weather, i) =>{
+    const ICon = id;
+      if(ICon === WEATHER_ICONS[i].id) {
+    dayFive.innerHTML += ` Current: <img src=${WEATHER_ICONS[i].link}>`
+    }
+  })
+}
+const IDArray = [200, 300, 500, 600]
+IDArray.forEach(id => Image(id))
 
 const SthlmTemp = () => {
     fetch(OurAPI).then((response) => {
         return response.json();
     }).then((json) => {
-        
-        Weather = [
-            json.list[0]["temp"]["day"],
-            json.list[1]["temp"]["day"],
-            json.list[2]["temp"]["day"],
-            json.list[3]["temp"]["day"],
-            json.list[4]["temp"]["day"],
-            json.list[5]["temp"]["day"]
-        ]
-        /*let datte = json.list[0].sunrise;
-        let dateRise = new Date(unixRise*1000).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-        console.log(dateRise)*/
-        // console.log(json.list[1].dt) commented out
-
+//Temperature
+    const temperatureArrayDays =  Array.from(
+        json.list, item => item.temp.day
+    );
+    const temperatureArrayDaysRounded = temperatureArrayDays.map((element) => {
+      const roundedTemp = Math.round(Number(element));
+      return roundedTemp
+    });
+    //Temperature 5 days
+    const temperatureFiveDays = temperatureArrayDaysRounded.filter((day, index) => {
+      return index > 0 && index < 6
+    });
+    //Temperature current day
+    const tempertureCurrentDay = temperatureArrayDaysRounded[0];
+    console.log(temperatureFiveDays);
+       
         let cloudSun = "./pics/Group34.png"
         let Rise = "./pics/sunrise.png"
 
@@ -64,8 +188,20 @@ const SthlmTemp = () => {
             return dateDateString
         })
          //console.log(newDateArray)
-    
 
+        const test = Array.from(
+            json.list, item => item.weather[0].main
+        );
+        //console.log(test);
+            const currentDay =test[0];
+            //console.log(currentDay); 
+        const fiveDays = test.filter((day, index) => {
+            return index >0 && index <6
+            }
+        )
+        console.log(fiveDays);
+
+        //console.log(weatherPic);
 
         let unixSet = json.list[0].sunset;
         //let dateSet = new Date(unixSet*1000);
@@ -76,32 +212,10 @@ const SthlmTemp = () => {
         tempCelsius.innerHTML = ` Current: <img src=${cloudSun}> </img> ${json.list[0]["temp"]["day"]}℃ / Min: ${json.list[0]["temp"]["min"]}℃  /Max: ${json.list[0]["temp"]["max"]}℃` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.)
         sunRise.innerHTML = `The Sun rises at ${dateRise} AM `
         sunSet.innerHTML = `The Sunset is at ${dateSet} PM` 
-        // The upcoming 5 days temp (PS! We need a function that prints the day automatically )
-        
-        /*let dates = newDateArray.forEach((date) => {
-            dayOne.innerHTML += `<dt class ="date">${date}</dt>`
-            //dates = document.getElementsByClassName("date")
-        });
-
-        let weath = Weather.forEach((weather) =>{
-            dayOne.innerHTML += `${weather}`
-        });
-        
-        dayOne.innerHTML = `${dates}: ${weath}`*/
 
 
-    /*const dateAndWeather = {
-        date: newDateArray,
-        weather: Weather,
-    }       
-    const testArray = [dateAndWeather];
-    console.log(testArray)
-
-    testArray.forEach((test) => {
-        dayOne.innerHTML += `${test.date[0]}:${test.weather[0]}`
-    })*/
-    for (let i = 1; i < newDateArray.length && i < Weather.length; i++) {
-        dayOne.innerHTML += `<dt>${newDateArray[i]}: ${Weather[i]} </dt>`
+    for (let i = 1; i < newDateArray.length && i < temperatureArray.length; i++) {
+        dayOne.innerHTML += `<dt>${newDateArray[i]}: ${temperatureArray[i]} </dt>`
     }
 
 
