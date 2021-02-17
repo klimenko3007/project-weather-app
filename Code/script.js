@@ -11,234 +11,10 @@ const dayThree = document.getElementById("dayThree")
 const dayFour = document.getElementById("dayFour")
 const dayFive = document.getElementById("dayFive")
 
-
-// TO do = Find how you can get access to the upcoming 5 days weather forecast. 
 // Global Variable
 const OurAPI = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Stockholm&cnt=10&appid=886705b4c1182eb1c69f28eb8c520e20&units=metric"
 //http://api.openweathermap.org/data/2.5/forecast?q=Stockholm&units=metric&appid=3c8d0ca53cf60cf5802dc4c0325edd88
 
-// Global Variable
-let cloudSun = "./pics/Group34.png"
-let Rise = "./pics/sunrise.png"
-
-const WEATHER_ICONS = [
-  {
-    id: 200,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 201,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 202,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 210,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 211,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 212,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 221,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 230,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 231,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 232,
-    link: 'http://openweathermap.org/img/wn/11d@2x.png'
-  },
-  {
-    id: 300,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 301,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },{
-    id: 302,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },{
-    id: 310,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },{
-    id: 311,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },{
-    id: 312,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },{
-    id: 313,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 314,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 321,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 500,
-    link: 'http://openweathermap.org/img/wn/10d@2x.png'
-  },
-  {
-    id: 501,
-    link: 'http://openweathermap.org/img/wn/10d@2x.png'
-  },
-  {
-    id: 502,
-    link: 'http://openweathermap.org/img/wn/10d@2x.png'
-  },
-  {
-    id: 503,
-    link: 'http://openweathermap.org/img/wn/10d@2x.png'
-  },
-  {
-    id: 504,
-    link: 'http://openweathermap.org/img/wn/10d@2x.png'
-  },
-  {
-    id: 511,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 520,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 521,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 522,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 531,
-    link: 'http://openweathermap.org/img/wn/09d@2x.png'
-  },
-  {
-    id: 601,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 602,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 611,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 612,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 613,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 615,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 616,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 620,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 621,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 622,
-    link: 'http://openweathermap.org/img/wn/13d@2x.png'
-  },
-  {
-    id: 700,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 701,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 711,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 721,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 731,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 741,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 751,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 761,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 762,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 771,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 781,
-    link: 'http://openweathermap.org/img/wn/50d@2x.png'
-  },
-  {
-    id: 800,
-    link: 'http://openweathermap.org/img/wn/01d@2x.png'
-  },
-  {
-    id: 801,
-    link: 'http://openweathermap.org/img/wn/02d@2x.png'
-  },
-  {
-    id: 802,
-    link: 'http://openweathermap.org/img/wn/03d@2x.png'
-  },
-  {
-    id: 803,
-    link: 'http://openweathermap.org/img/wn/04d@2x.png'
-  },
-  {
-    id: 804,
-    link: 'http://openweathermap.org/img/wn/04d@2x.png'
-  },
-  
-]
 
 const SthlmTemp = () => {
     fetch(OurAPI).then((response) => {
@@ -254,6 +30,10 @@ const SthlmTemp = () => {
         //Calculation to convert unix stamp to normal timezone
         const dateRise = new Date(unixRise*1000).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
         
+        //Min and Max temperature
+        const minTemperature = Math.round(json.list[0].temp.min);
+        const maxTemperature = Math.round(json.list[0].temp.max)
+
         //Temperature
         const temperatureArrayDays =  Array.from(
             json.list, item => item.temp.day
@@ -287,42 +67,55 @@ const SthlmTemp = () => {
         });
         //Date Current Day
         const dateCurrentDay = newDateArray[0];
-
-        //Weather ID
+        //Weather description
+        const weatherDescriptionArray = Array.from(
+          json.list, item => item.weather[0].description
+        )
+        //Current day weather description
+        const currentDayWeatherDescrition = weatherDescriptionArray[0]
+        //Weather icon ID
         const weatherIdArray = Array.from(
-            json.list, item => item.weather[0].id
+            json.list, item => item.weather[0].icon
         );
-        //Current Weather ID
+        //Current Weather icon ID
         const currentWeatherId = weatherIdArray[0];
-        //Weather Five dayes
+        //Weather Five dayes icon ID
         const fiveDaysId = weatherIdArray.filter((day, index) => {
             return index >0 && index <6
             }
         )
 
       // Adding API information into HTML elements 
-        highlight.innerHTML = `Today the ${json.list[0]["weather"][0]["description"]}`
-        cityName.innerHTML = `<h3>${json.city["name"]}</h3>`
-        tempCelsius.innerHTML = ` Current: <img src=${cloudSun}> </img> ${json.list[0]["temp"]["day"]}℃ / Min: ${json.list[0]["temp"]["min"]}℃  /Max: ${json.list[0]["temp"]["max"]}℃` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.)
-        sunRise.innerHTML = `The Sun rises at ${dateRise} AM `
-        sunSet.innerHTML = `The Sunset is at ${dateSet} PM` 
+        highlight.innerHTML = `${tempertureCurrentDay}℃ ${currentDayWeatherDescrition} <img width="40px" src="http://openweathermap.org/img/wn/${currentWeatherId}@2x.png"<img>`
+        cityName.innerHTML = `${json.city["name"]}`
+        tempCelsius.innerHTML = `<span> Min: ${minTemperature}℃</span>  <span> Max: ${maxTemperature}℃</span> ` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.)
+        sunRise.innerHTML = `Sunrise: ${dateRise} AM `
+        sunSet.innerHTML = `Sunset: ${dateSet} PM` 
 
 
-    // for (let i = 0; i < dateFiveDays.length && i < temperatureFiveDays.length; i++) {
-    //     dayOne.innerHTML += `<dt>${dateFiveDays[i]}: ${temperatureFiveDays[i]} <img src="http://openweathermap.org/img/wn/11d@2x.png" width="40px" > </dt>`
+    // for (let i = 0; i < dateFiveDays.length && i < temperatureFiveDays.length && i < fiveDaysId.length; i++) {
+    //     dayOne.innerHTML += `<dt>${dateFiveDays[i]}: ${temperatureFiveDays[i]} <img src="http://openweathermap.org/img/wn/${fiveDaysId[i]}@2x.png" width="40px" > </dt>`
     // }
-    
-    // Function that checks ID and adds an image
-
-
-    fiveDaysId.forEach((ID, index) => {
-      WEATHER_ICONS.forEach((weather, i) =>{
-        const ICon = ID;
-          if(ICon === WEATHER_ICONS[i].id) {
-            dayOne.innerHTML += `<dt>${dateFiveDays[index]}: ${temperatureFiveDays[index]}C <img src=${WEATHER_ICONS[i].link} width="40px" > </dt>`
-        }
-      })
+    dateFiveDays.forEach((day, index) => {
+        const temperature = temperatureFiveDays[index];
+        const icon = fiveDaysId[index]
+        dayOne.innerHTML += `
+        <dt class="forecast-line" >${day} <img src="http://openweathermap.org/img/wn/${icon}@2x.png" width="40px" > ${temperature}  </dt>
+        `
     })
+    
+
+    // I was just playing around with this Function that checks ID and adds an image 
+    // It works in theory but I am really not happy with the solution
+
+    // fiveDaysId.forEach((ID, index) => {
+    //   WEATHER_ICONS.forEach((weather, i) =>{
+    //     const ICon = ID;
+    //       if(ICon === WEATHER_ICONS[i].id) {
+    //         dayOne.innerHTML += `<dt class="forecast-line">${dateFiveDays[index]}: ${temperatureFiveDays[index]}C <img src=${WEATHER_ICONS[i].link} width="40px" > </dt>`
+    //     }
+    //   })
+    // })
 
 
         /*dayOne.innerHTML = `${newDateArray[1]}: ${Weather[1]} ℃`;
