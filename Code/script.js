@@ -18,6 +18,8 @@ const OurAPI = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Stockhol
 //http://api.openweathermap.org/data/2.5/forecast?q=Stockholm&units=metric&appid=3c8d0ca53cf60cf5802dc4c0325edd88
 
 // Global Variable
+let cloudSun = "./pics/Group34.png"
+let Rise = "./pics/sunrise.png"
 
 const WEATHER_ICONS = [
   {
@@ -132,6 +134,8 @@ const WEATHER_ICONS = [
     link: 'http://openweathermap.org/img/wn/09d@2x.png'
   },
 ]
+
+// Function that check the image ID
 const Image = (id) => {
   WEATHER_ICONS.forEach((weather, i) =>{
     const ICon = id;
@@ -140,73 +144,68 @@ const Image = (id) => {
     }
   })
 }
-const IDArray = [200, 300, 500, 600]
-IDArray.forEach(id => Image(id))
 
 const SthlmTemp = () => {
     fetch(OurAPI).then((response) => {
         return response.json();
     }).then((json) => {
-//Temperature
-    const temperatureArrayDays =  Array.from(
-        json.list, item => item.temp.day
-    );
-    const temperatureArrayDaysRounded = temperatureArrayDays.map((element) => {
-      const roundedTemp = Math.round(Number(element));
-      return roundedTemp
-    });
-    //Temperature 5 days
-    const temperatureFiveDays = temperatureArrayDaysRounded.filter((day, index) => {
-      return index > 0 && index < 6
-    });
-    //Temperature current day
-    const tempertureCurrentDay = temperatureArrayDaysRounded[0];
-    console.log(temperatureFiveDays);
-       
-        let cloudSun = "./pics/Group34.png"
-        let Rise = "./pics/sunrise.png"
-
+        //Sunset time
+        const unixSet = json.list[0].sunset;
         //Calculation to convert unix stamp to normal timezone
-        let unixRise = json.list[0].sunrise;
-        //let dateRise = new Date(unixRise*1000);
-        //console.log(unixRise) Commented out
-        let dateRise = new Date(unixRise*1000).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+        const dateSet = new Date(unixSet*1000).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+  
+        //Sunrise time
+        const unixRise = json.list[0].sunrise;
+        //Calculation to convert unix stamp to normal timezone
+        const dateRise = new Date(unixRise*1000).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
         
-        const dateArray = [json.list[0].dt, json.list[1].dt, json.list[2].dt, json.list[3].dt, json.list[4].dt, json.list[5].dt];
-
+        //Temperature
+        const temperatureArrayDays =  Array.from(
+            json.list, item => item.temp.day
+        );
+        const temperatureArrayDaysRounded = temperatureArrayDays.map((element) => {
+          const roundedTemp = Math.round(Number(element));
+          return roundedTemp
+        });
+        //Temperature 5 days
+        const temperatureFiveDays = temperatureArrayDaysRounded.filter((day, index) => {
+          return index > 0 && index < 6
+        });
+        console.log(temperatureFiveDays);
+        //Temperature current day
+        const tempertureCurrentDay = temperatureArrayDaysRounded[0];
         
-        //
-        let newDateArray = dateArray.map( (date) =>{
+        //Day of the week
+        const dateArray = Array.from(
+          json.list, item => item.dt
+      );
+        const newDateArray = dateArray.map( (date) =>{
             const launchDate = new Date((date)*1000);
-            //const dateTimeString = launchDate.toLocaleTimeString('en-US', {
-                //timestyle:'short',
-                //hour12:false,
-            //});
             const dateDateString = launchDate.toLocaleDateString('en-US', {
                 weekday:'short',
-            })
+            });
             return dateDateString
-        })
-         //console.log(newDateArray)
+        });
+        //Five days
+        const dateFiveDays = newDateArray.filter ((date, index) => {
+          return index > 0 && index < 6
+        });
+        //Date Current Day
+        const dateCurrentDay = newDateArray[0];
 
-        const test = Array.from(
-            json.list, item => item.weather[0].main
+        //Weather ID
+        const weatherIdArray = Array.from(
+            json.list, item => item.weather[0].id
         );
-        //console.log(test);
-            const currentDay =test[0];
-            //console.log(currentDay); 
-        const fiveDays = test.filter((day, index) => {
+        //Current Weather ID
+        const currentWeatherId = weatherIdArray[0];
+        //Weather Five dayes
+        const fiveDaysId = weatherIdArray.filter((day, index) => {
             return index >0 && index <6
             }
         )
-        console.log(fiveDays);
 
-        //console.log(weatherPic);
-
-        let unixSet = json.list[0].sunset;
-        //let dateSet = new Date(unixSet*1000);
-        let dateSet = new Date(unixSet*1000).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-
+      // Adding API information into HTML elements 
         highlight.innerHTML = `Today the ${json.list[0]["weather"][0]["description"]}`
         cityName.innerHTML = `<h3>${json.city["name"]}</h3>`
         tempCelsius.innerHTML = ` Current: <img src=${cloudSun}> </img> ${json.list[0]["temp"]["day"]}℃ / Min: ${json.list[0]["temp"]["min"]}℃  /Max: ${json.list[0]["temp"]["max"]}℃` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.)
@@ -214,8 +213,8 @@ const SthlmTemp = () => {
         sunSet.innerHTML = `The Sunset is at ${dateSet} PM` 
 
 
-    for (let i = 1; i < newDateArray.length && i < temperatureArray.length; i++) {
-        dayOne.innerHTML += `<dt>${newDateArray[i]}: ${temperatureArray[i]} </dt>`
+    for (let i = 0; i < dateFiveDays.length && i < temperatureFiveDays.length; i++) {
+        dayOne.innerHTML += `<dt>${dateFiveDays[i]}: ${temperatureFiveDays[i]} <img src="http://openweathermap.org/img/wn/11d@2x.png" width="40px" > </dt>`
     }
 
 
