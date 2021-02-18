@@ -9,10 +9,18 @@
 </head>
 <body class="body">
     <h1 class="headline">Checkout the weather in:</h1>
+    <select name="" id="select-city" >
+        <option value="" disabled selected>Choose a city</option>
+        <option value="New York">New York</option>
+        <option value="Bishkek">Bishkek</option>
+        <option value="Kabul">Kabul</option>
+        <option value="Honolulu">Honolulu</option>
+    </select>
     <div class="city-container">
-        <h2 id="city-name" class="city-name">Loading City Name ...</h1>
+        <h2 id="city-name" class="city-name">Choose a city</h1>
         <div class="day-forecast-container" >    
             <div class="current-day-container">
+                <div id="funny-text">Funny text</div>
                 <div id="highlight" class="weather-description">Loading ...</div>
                 <div id="tempCelsius" class="min-max">Loading ...  </div>
                 <div id="sunRise">Sunrise is Loading...</div>

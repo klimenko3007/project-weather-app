@@ -19,7 +19,6 @@
 }
 .day-forecast-container{
     border: white 3px solid;
-    height: 0;
     overflow: hidden;
     transition: height 0.6s ease-out; 
 }
