@@ -1,15 +1,16 @@
 // All the DOMs are here
-const cityName = document.getElementById("cityName")
+const cityName = document.getElementById("city-name")
 const tempCelsius = document.getElementById("tempCelsius")
 const sunSet = document.getElementById("sunSet")
 const sunRise = document.getElementById("sunRise")
 const highlight = document.getElementById("highlight")
 const container = document.getElementById("container")
 const dayOne = document.getElementById("dayOne")
-const dayTwo = document.getElementById("dayTwo")
-const dayThree = document.getElementById("dayThree")
-const dayFour = document.getElementById("dayFour")
-const dayFive = document.getElementById("dayFive")
+const currentDaySection = document.querySelector("#current-day-container")
+const openingOfInfo = document.querySelectorAll(".day-forecast-container")
+const allCities = document.querySelectorAll(".city-name")
+const body = document.querySelector(".body")
+
 
 // Global Variable
 const OurAPI = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Stockholm&cnt=10&appid=886705b4c1182eb1c69f28eb8c520e20&units=metric"
@@ -67,10 +68,13 @@ const SthlmTemp = () => {
         });
         //Date Current Day
         const dateCurrentDay = newDateArray[0];
+        //Current weather
+        const currentWeather = json.list[0].weather[0].main
         //Weather description
         const weatherDescriptionArray = Array.from(
           json.list, item => item.weather[0].description
         )
+         
         //Current day weather description
         const currentDayWeatherDescrition = weatherDescriptionArray[0]
         //Weather icon ID
@@ -86,9 +90,9 @@ const SthlmTemp = () => {
         )
 
       // Adding API information into HTML elements 
-        highlight.innerHTML = `${tempertureCurrentDay}℃ ${currentDayWeatherDescrition} <img width="40px" src="http://openweathermap.org/img/wn/${currentWeatherId}@2x.png"<img>`
+        highlight.innerHTML = ` ${currentDayWeatherDescrition} <img width="40px" src="http://openweathermap.org/img/wn/${currentWeatherId}@2x.png"<img>`
         cityName.innerHTML = `${json.city["name"]}`
-        tempCelsius.innerHTML = `<span> Min: ${minTemperature}℃</span>  <span> Max: ${maxTemperature}℃</span> ` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.)
+        tempCelsius.innerHTML = `<span> ${tempertureCurrentDay}℃ Min: ${minTemperature}℃</span>  <span> Max: ${maxTemperature}℃</span> ` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.)
         sunRise.innerHTML = `Sunrise: ${dateRise} AM `
         sunSet.innerHTML = `Sunset: ${dateSet} PM` 
 
@@ -104,26 +108,33 @@ const SthlmTemp = () => {
         `
     })
     
+    //Styling of the body color depending on the current weather
 
-    // I was just playing around with this Function that checks ID and adds an image 
-    // It works in theory but I am really not happy with the solution
+    switch (currentWeather) {
+      case 'Clouds': {
+        body.style.backgroundImage = "url('')"
+      }
+        break;
+      case 'Snow': {
+        break;
+      }
+    }
 
-    // fiveDaysId.forEach((ID, index) => {
-    //   WEATHER_ICONS.forEach((weather, i) =>{
-    //     const ICon = ID;
-    //       if(ICon === WEATHER_ICONS[i].id) {
-    //         dayOne.innerHTML += `<dt class="forecast-line">${dateFiveDays[index]}: ${temperatureFiveDays[index]}C <img src=${WEATHER_ICONS[i].link} width="40px" > </dt>`
-    //     }
-    //   })
-    // })
+    const accordionQuestion = document.querySelectorAll('.accordion-question');
 
-
-        /*dayOne.innerHTML = `${newDateArray[1]}: ${Weather[1]} ℃`;
-        dayTwo.innerHTML = `${newDateArray[2]}: ${json.list[2]["temp"]["day"]} ℃`;
-        dayThree.innerHTML = `${newDateArray[3]}: ${json.list[3]["temp"]["day"]} ℃`;
-        dayFour.innerHTML = `${newDateArray[4]}: ${json.list[4]["temp"]["day"]} ℃`;
-        dayFive.innerHTML = `${newDateArray[5]}: ${json.list[5]["temp"]["day"]} ℃`;*/
-
+    allCities.forEach(cityName => {
+      cityName.addEventListener('click', () => {
+        cityName.classList.toggle('clicked')
+        const info =cityName.nextElementSibling;
+        if(cityName.classList.contains('clicked')) {
+          info.style.height = info.scrollHeight + 'px';
+        }
+        else {
+          info.style.height = '0';
+        }
+    })
+    })
+    
     })
 }
 
