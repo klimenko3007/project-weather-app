@@ -8,7 +8,7 @@ The stretch goals included: a)change the colors of the page based on the weather
 
 ## The problem
 
-We used the following tools to achieve the goals:
+I used the following tools to achieve the goals:
 a) Method fetch() to get data from the API;
 b) Method Array.from() to creat arrays of necessary data;
 c) Methods forEach() and map() to iterate through arrays to modify the data and present it in the html file;
@@ -16,4 +16,4 @@ d) Media Queries to make the page responseive we created.
 
 ## View it live
 
-Have a look at the app following the link: 
+Have a look at the app following the link: https://vigorous-swirles-f9b4c5.netlify.app;

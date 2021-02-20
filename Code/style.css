@@ -1,6 +1,6 @@
 .body {
     margin: 0;
-    background-color: whitesmoke;
+    background-color: rgb(42, 123, 209);
     height: 100vh;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -56,21 +56,6 @@
     animation-delay: 0.5s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
-
-@keyframes bounce {
-    0% {
-        left: 0px;
-        top: 0px;
-    }
-    50% {
-        left: 0px;
-        top: 10px;
-    }
-    100% {
-        left: 0px;
-        top: 0px;
-    }
 }
 
 .min-max {
@@ -136,6 +121,20 @@
 .night {
     color: rgb(150, 148, 148);
     justify-self: self-end;
+}
+@keyframes bounce {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+    50% {
+        left: 0px;
+        top: 10px;
+    }
+    100% {
+        left: 0px;
+        top: 0px;
+    }
 }
 
 @media (min-width: 658px) {

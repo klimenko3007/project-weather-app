@@ -206,6 +206,14 @@ const SthlmTemp = (userChoice) => {
         break;
       };
     };
+  })
+  .catch( (error) =>{
+    console.log(error);
+    body.innerHTML ="Oops! Something went wrong";
+    body.style.backgroundColor = "#144182";
+    body.style.color = "white";
+    body.style.fontSize ="30px";
+
   });
 };
 //Entry point
