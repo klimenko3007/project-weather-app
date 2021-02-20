@@ -12,7 +12,7 @@ I used the following tools to achieve the goals:
 a) Method fetch() to get data from the API;
 b) Method Array.from() to creat arrays of necessary data;
 c) Methods forEach() and map() to iterate through arrays to modify the data and present it in the html file;
-d) Media Queries to make the page responseive we created.
+d) Media Queries to make the page responsieve.
 
 ## View it live
 
