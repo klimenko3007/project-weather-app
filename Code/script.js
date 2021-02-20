@@ -13,7 +13,7 @@ const sunrisePic = "./pics/sunrise.png";
 const sunsetPic = "./pics/sunset.png";
 //Fetch function
 const SthlmTemp = (userChoice) => {
-  const cityAPI = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${userChoice}&cnt=10&appid=886705b4c1182eb1c69f28eb8c520e20&units=metric`;
+  const cityAPI = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${userChoice}&cnt=10&appid=886705b4c1182eb1c69f28eb8c520e20&units=metric`;
   fetch(cityAPI).then((response) => {
     return response.json();
   }).then((json) => {
