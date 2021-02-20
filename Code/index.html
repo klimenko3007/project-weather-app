@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="body">
   <div class="city-forecast-wrapper">
     <section class="city-container">
-        <h1 class="headline">Check out the weather in:</h1>
-        <select class="select-city" id="select-city" >
-            <option value="" disabled selected>Choose a city</option>
-            <option value="New York">New York</option>
-            <option value="Bishkek">Bishkek</option>
-            <option value="Kabul">Kabul</option>
-            <option value="Honolulu">Honolulu</option>
-            <option value="Stockholm">Stockholm</option>
-        </select>
-        <div id="conteiner-icon-temp" class="conteiner-icon-temp"></div>
-        <div class="current-day-container"> 
-            <div id="tempCelsius" class="min-max">Loading ...  </div>
-            <div class="sun-wrapper">
-                <div id="sunRise" class="sunrise-sunset">Sunrise is Loading...</div>
-                <div id="sunSet" class="sunrise-sunset">Sunset is Loading...</div>
-            </div>
+      <h1 class="headline">Check out the weather in:</h1>
+      <select class="select-city" id="select-city">
+        <option value="" disabled selected>Choose a city</option>
+        <option value="New York">New York</option>
+        <option value="Bishkek">Bishkek</option>
+        <option value="Kabul">Kabul</option>
+        <option value="Honolulu">Honolulu</option>
+        <option value="Stockholm">Stockholm</option>
+      </select>
+      <div id="conteiner-icon-temp" class="conteiner-icon-temp"></div>
+      <div class="current-day-container">
+        <div id="tempCelsius" class="min-max">Loading ... </div>
+        <div class="sun-wrapper">
+          <div id="sunRise" class="sunrise-sunset">Sunrise is Loading...</div>
+          <div id="sunSet" class="sunrise-sunset">Sunset is Loading...</div>
         </div>
-    </section>  
-    <section id="forecast" class="forecast-list">  
+      </div>
     </section>
-  </div>  
+    <section id="forecast" class="forecast-list">
+    </section>
+  </div>
 
-    <script src="./script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
