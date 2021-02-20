@@ -4,20 +4,14 @@ const containerIconTemp = document.getElementById("conteiner-icon-temp")
 const minMaxTemp = document.getElementById("tempCelsius")
 const sunSet = document.getElementById("sunSet")
 const sunRise = document.getElementById("sunRise")
-const container = document.getElementById("container")
-const dayOne = document.getElementById("dayOne")
-const currentDaySection = document.querySelector("#current-day-container")
-const openingOfInfo = document.querySelectorAll(".day-forecast-container")
-const allCities = document.querySelectorAll(".city-name")
+const forecast = document.getElementById("forecast")
 const body = document.querySelector(".body")
-
+const cityContainer = document.querySelector(".city-container")
 
 // Global Variable
-//const OurAPI = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Stockholm&cnt=10&appid=886705b4c1182eb1c69f28eb8c520e20&units=metric"
-//http://api.openweathermap.org/data/2.5/forecast?q=Stockholm&units=metric&appid=3c8d0ca53cf60cf5802dc4c0325edd88
-
 const sunrisePic = "./pics/sunrise.png"
 const sunsetPic = "./pics/sunset.png"
+//Fetch function
 const SthlmTemp = (userChoice) => {
   const cityAPI = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${userChoice}&cnt=10&appid=886705b4c1182eb1c69f28eb8c520e20&units=metric` 
   fetch(cityAPI).then((response) => {
@@ -123,38 +117,104 @@ const SthlmTemp = (userChoice) => {
         const temperature = temperatureFiveDays[index];
         const icon = fiveDaysId[index]
         const nightTemp = nightTempFiveDays[index];
-        dayOne.innerHTML += `
-        <dt class="forecast-line" >${day} <img src="http://openweathermap.org/img/wn/${icon}@2x.png" width="40px" > ${temperature}℃ / ${nightTemp}℃</dt>
+        forecast.innerHTML += `
+          <div class="forecast-line" > 
+            <span class=five-text>${day}</span> 
+            <img class="five-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png" width="40px" > 
+            <span class=five-text day>${temperature}℃</span>
+            <span class="night">${nightTemp}℃ </span>
+          </div>
         `
     })
     
     //Styling of the body color depending on the current weather
 
-    if (tempertureCurrentDay <= 0 && tempertureCurrentDay >= -10) {
-        body.style.background = "linear-gradient(0deg, rgba(34,92,195,1) 0%, rgba(162,200,210,1) 100%)"
-    } else if (tempertureCurrentDay >0 && tempertureCurrentDay <= 10){
-        body.style.background = "linear-gradient(0deg, rgba(34,188,195,1) 0%, rgba(195,209,213,1) 100%)"
-    } else if (tempertureCurrentDay > 10 && tempertureCurrentDay <= 20){
-        body.style.background = "linear-gradient(0deg, rgba(34,188,195,1) 0%, rgba(195,209,213,1) 100%)"
+    const currentWeatherBackground = json.list[0].weather[0].main
+
+    const changeBackgroundColor = (cityBackgound, forecastBackground, bodyBackground)=> {
+      cityContainer.style.backgroundImage = `${cityBackgound}`
+      selectCity.style.backgroundColor = `${forecastBackground}`
+      body.style.backgroundColor = `${bodyBackground}`
     }
 
-    // allCities.forEach(cityName => {
-    //   cityName.addEventListener('click', () => {
-    //     cityName.classList.toggle('clicked')
-    //     const info =cityName.nextElementSibling;
-    //     if(cityName.classList.contains('clicked')) {
-    //       info.style.height = info.scrollHeight + 'px';
-    //     }
-    //     else {
-    //       info.style.height = '0';
-    //     }
-    // })
-    // })
+    const changeFontColor = (cityColor, forecastColor, selectColor) => {
+      cityContainer.style.color = `${cityColor}`
+      forecast.style.color = `${forecastColor}`
+      selectCity.style.color = `${selectColor}`
+    }
+
+    switch (currentWeatherBackground) {
+      case 'Clouds': {
+        changeBackgroundColor(
+          "linear-gradient(#4e5f6e, #a3b1bc, #e8ecf2)",
+           "#718291", 
+           "#718291"
+          )
+        changeFontColor("#1d252b", "white", "white")
+        
+        break;
+      }
+      case 'Rain': {
+        changeBackgroundColor(
+          "linear-gradient(#002e43, #406378, #8fa5b3)",
+           "#637b8a", 
+           "#637b8a"
+          )
+        changeFontColor("white", "white", "white")
+        break;
+      }
+      case 'Snow': {
+        changeBackgroundColor(
+          "linear-gradient(#144361, #6298BC, #87B2CC)",
+           "#326585", 
+           "#326585"
+          )
+        changeFontColor("white", "white", "white")
+        break;
+      }
+      case 'Thunderstorm': {
+        changeBackgroundColor(
+          "linear-gradient(#144182, #4776b9, #a7c5e8)",
+           "#88afdd", 
+           "#88afdd"
+          )
+        changeFontColor("white", "#144182", "white")
+        break;
+      }
+      case 'Drizzle': {
+        changeBackgroundColor(
+          "linear-gradient(#554853, #605c64, #a29a9d)",
+           "#736871", 
+           "#736871"
+          )
+        changeFontColor("white", "white", "white")
+        break;
+      }
+      case 'Clear': {
+        changeBackgroundColor(
+          "linear-gradient(#69545b, #9a6763, #f69358)",
+           "#785f67", 
+           "#785f67"
+          )
+        changeFontColor("white", "white", "white")
+        break;
+      }
+      default:{
+        changeBackgroundColor(
+          "linear-gradient(#766e3f, #a69e70, #b6b9a3)",
+           "#5e5832", 
+           "#6e673a"
+          )
+        changeFontColor("white", "white", "white")
+        break;
+      }
+    };
+
     })
 }
 SthlmTemp('Stockholm')
 selectCity.addEventListener('change', () => {
-  dayOne.innerHTML = '';
+  forecast.innerHTML = '';
   SthlmTemp(selectCity.value)
 }) 
 
