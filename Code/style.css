@@ -1,22 +1,61 @@
 .body {
-    background: rgb(226, 226, 175);
     /* background-image: url('./pics/clear.jpeg');*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover; 
-    height: 100vh;
     scroll-behavior: smooth;
+    margin: 0;
 }
-
-.headline {
+.headline{
+    margin-top: 0;
     border: blue 1px solid;
 }
-.city-container{
-    border: red 1px solid;
+.city-container {
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 10px;
+}
+.conteiner-icon-temp{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 40px;
+    margin: 0;
 }
 .city-name {
-    border: green 1px solid;
+    padding: 0;
+    margin: 0;
+    font-size: 30px;
 }
+.weather {
+    font-size: 25px;
+}
+.current-icon{
+    width: 150px;
+    margin: 0 -10px 0 0;
+}
+.min-max {
+    display: flex;
+    justify-content: space-around;
+}
+.sunrise-sunset {
+    display: flex;
+    align-items: center;
+}
+.current-day-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+.sun-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .day-forecast-container{
     border: white 3px solid;
     overflow: hidden;
@@ -26,13 +65,8 @@
     border-bottom: white 2px solid;
 }
 
-.current-day-container {
-    border:grey 2px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+
+
 .weather-description {
     display: flex;
     align-items: center;

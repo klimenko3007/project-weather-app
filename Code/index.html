@@ -8,31 +8,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="body">
-    <h1 class="headline">Checkout the weather in:</h1>
-    <select name="" id="select-city" >
-        <option value="" disabled selected>Choose a city</option>
-        <option value="New York">New York</option>
-        <option value="Bishkek">Bishkek</option>
-        <option value="Kabul">Kabul</option>
-        <option value="Honolulu">Honolulu</option>
-    </select>
     <div class="city-container">
-        <h2 id="city-name" class="city-name">Choose a city</h1>
-        <div class="day-forecast-container" >    
-            <div class="current-day-container">
-                <div id="funny-text">Funny text</div>
-                <div id="highlight" class="weather-description">Loading ...</div>
-                <div id="tempCelsius" class="min-max">Loading ...  </div>
-                <div id="sunRise">Sunrise is Loading...</div>
-                <div id="sunSet">Sunset is Loading...</div>
+        <h1 class="headline">Checkout the weather in:</h1>
+        <select name="" id="select-city" >
+            <option value="" disabled selected>Choose a city</option>
+            <option value="New York">New York</option>
+            <option value="Bishkek">Bishkek</option>
+            <option value="Kabul">Kabul</option>
+            <option value="Honolulu">Honolulu</option>
+        </select>
+        <div id="conteiner-icon-temp" class="conteiner-icon-temp"></div>
+        <div class="current-day-container"> 
+            <div id="tempCelsius" class="min-max">Loading ...  </div>
+            <div class="sun-wrapper">
+                <div id="sunRise" class="sunrise-sunset">Sunrise is Loading...</div>
+                <div id="sunSet" class="sunrise-sunset">Sunset is Loading...</div>
             </div>
+        </div>
+    </div>  
             <dl class="forecast-container">
-                <h4 class="forecast-headline">Upcoming weather forecast</h4>
                 <div id="dayOne" class="forecast-list">  
                 </div>
             </dl>
-        </div>
-    </div>
+    
 
 
 
