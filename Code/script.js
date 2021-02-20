@@ -1,12 +1,12 @@
 // All the DOMs are here
-const selectCity = document.getElementById("select-city")
-const containerIconTemp = document.getElementById("conteiner-icon-temp")
-const minMaxTemp = document.getElementById("tempCelsius")
-const sunSet = document.getElementById("sunSet")
-const sunRise = document.getElementById("sunRise")
-const forecast = document.getElementById("forecast")
-const body = document.querySelector(".body")
-const cityContainer = document.querySelector(".city-container")
+const selectCity = document.getElementById("select-city");
+const containerIconTemp = document.getElementById("conteiner-icon-temp");
+const minMaxTemp = document.getElementById("tempCelsius");
+const sunSet = document.getElementById("sunSet");
+const sunRise = document.getElementById("sunRise");
+const forecast = document.getElementById("forecast");
+const body = document.querySelector(".body");
+const cityContainer = document.querySelector(".city-container");
 
 // Global Variable
 const sunrisePic = "./pics/sunrise.png"
@@ -68,7 +68,7 @@ const SthlmTemp = (userChoice) => {
         //Day of the week
         const dateArray = Array.from(
           json.list, item => item.dt
-      );
+        );
         const newDateArray = dateArray.map( (date) =>{
             const ourDate = new Date((date)*1000);
             const dateDateString = ourDate.toLocaleDateString('en-US', {
@@ -88,7 +88,6 @@ const SthlmTemp = (userChoice) => {
         const weatherDescriptionArray = Array.from(
           json.list, item => item.weather[0].description
         )
-         
         //Current day weather description
         const currentDayWeatherDescrition = weatherDescriptionArray[0]
         //Weather icon ID
@@ -111,107 +110,108 @@ const SthlmTemp = (userChoice) => {
             <div class="city-name">${json.city.name}</div>
           </div>
           <img class="current-icon" src="http://openweathermap.org/img/wn/${currentWeatherId}@2x.png"<img>`
-        minMaxTemp.innerHTML = ` Min: ${minTemperature}℃</span><span> Max: ${maxTemperature}℃</span> ` // The weather icon will be changed depending on time and is affected by an function that will trigger and if else statement(its its cloudy === this picture etc.) 
+        minMaxTemp.innerHTML = ` Min: ${minTemperature}℃</span><span> Max: ${maxTemperature}℃</span> `
 
-    dateFiveDays.forEach((day, index) => {
-        const temperature = temperatureFiveDays[index];
-        const icon = fiveDaysId[index]
-        const nightTemp = nightTempFiveDays[index];
-        forecast.innerHTML += `
-          <div class="forecast-line" > 
-            <span class=five-text>${day}</span> 
-            <img class="five-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png" width="40px" > 
-            <span class=five-text day>${temperature}℃</span>
-            <span class="night">${nightTemp}℃ </span>
-          </div>
-        `
-    })
+        dateFiveDays.forEach((day, index) => {
+            const temperature = temperatureFiveDays[index];
+            const icon = fiveDaysId[index]
+            const nightTemp = nightTempFiveDays[index];
+            forecast.innerHTML += `
+              <div class="forecast-line" > 
+                <span class="five-text">${day}</span> 
+                <img class="five-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png" width="40px" > 
+                <span class="five-text day">${temperature}℃</span>
+                <span class="night">${nightTemp}℃ </span>
+              </div>
+            `
+        })
     
     //Styling of the body color depending on the current weather
 
-    const currentWeatherBackground = json.list[0].weather[0].main
+        const currentWeatherBackground = json.list[0].weather[0].main
 
-    const changeBackgroundColor = (cityBackgound, forecastBackground, bodyBackground)=> {
-      cityContainer.style.backgroundImage = `${cityBackgound}`
-      selectCity.style.backgroundColor = `${forecastBackground}`
-      body.style.backgroundColor = `${bodyBackground}`
-    }
+        const changeBackgroundColor = (cityBackgound, selectBackground, bodyBackground)=> {
+          cityContainer.style.backgroundImage = `${cityBackgound}`
+          selectCity.style.backgroundColor = `${selectBackground}`
+          body.style.backgroundColor = `${bodyBackground}`
+        }
 
-    const changeFontColor = (cityColor, forecastColor, selectColor) => {
-      cityContainer.style.color = `${cityColor}`
-      forecast.style.color = `${forecastColor}`
-      selectCity.style.color = `${selectColor}`
-    }
+        const changeFontColor = (cityColor, forecastColor, selectColor) => {
+          cityContainer.style.color = `${cityColor}`
+          forecast.style.color = `${forecastColor}`
+          selectCity.style.color = `${selectColor}`
+        }
 
-    switch (currentWeatherBackground) {
-      case 'Clouds': {
-        changeBackgroundColor(
-          "linear-gradient(#4e5f6e, #a3b1bc, #e8ecf2)",
-           "#718291", 
-           "#718291"
-          )
-        changeFontColor("#1d252b", "white", "white")
-        
-        break;
-      }
-      case 'Rain': {
-        changeBackgroundColor(
-          "linear-gradient(#002e43, #406378, #8fa5b3)",
-           "#637b8a", 
-           "#637b8a"
-          )
-        changeFontColor("white", "white", "white")
-        break;
-      }
-      case 'Snow': {
-        changeBackgroundColor(
-          "linear-gradient(#144361, #6298BC, #87B2CC)",
-           "#326585", 
-           "#326585"
-          )
-        changeFontColor("white", "white", "white")
-        break;
-      }
-      case 'Thunderstorm': {
-        changeBackgroundColor(
-          "linear-gradient(#144182, #4776b9, #a7c5e8)",
-           "#88afdd", 
-           "#88afdd"
-          )
-        changeFontColor("white", "#144182", "white")
-        break;
-      }
-      case 'Drizzle': {
-        changeBackgroundColor(
-          "linear-gradient(#554853, #605c64, #a29a9d)",
-           "#736871", 
-           "#736871"
-          )
-        changeFontColor("white", "white", "white")
-        break;
-      }
-      case 'Clear': {
-        changeBackgroundColor(
-          "linear-gradient(#69545b, #9a6763, #f69358)",
-           "#785f67", 
-           "#785f67"
-          )
-        changeFontColor("white", "white", "white")
-        break;
-      }
-      default:{
-        changeBackgroundColor(
-          "linear-gradient(#766e3f, #a69e70, #b6b9a3)",
-           "#5e5832", 
-           "#6e673a"
-          )
-        changeFontColor("white", "white", "white")
-        break;
-      }
-    };
+        switch (currentWeatherBackground) {
+          case 'Clouds': {
+            changeBackgroundColor(
+              "linear-gradient(#4e5f6e, #a3b1bc, #e8ecf2)",
+              "#718291", 
+              "#718291"
+              );
+            changeFontColor("#1d252b", "white", "white");
+            
+            break;
+          }
+          case 'Rain': {
+            changeBackgroundColor(
+              "linear-gradient(#002e43, #406378, #8fa5b3)",
+              "#637b8a", 
+              "#637b8a"
+              )
+            changeFontColor("white", "white", "white")
+            break;
+          }
+          case 'Snow': {
+            changeBackgroundColor(
+              "linear-gradient(#144361, #6298BC, #87B2CC)",
+              "#326585", 
+              "#326585"
+              )
+            changeFontColor("white", "white", "white")
+            break;
+          }
+          case 'Thunderstorm': {
+            changeBackgroundColor(
+              "linear-gradient(#144182, #4776b9, #a7c5e8)",
+              "#88afdd", 
+              "#88afdd"
+              )
+            changeFontColor("white", "#144182", "white")
+            break;
+          }
+          case 'Drizzle': {
+            changeBackgroundColor(
+              "linear-gradient(#554853, #605c64, #a29a9d)",
+              "#736871", 
+              "#736871"
+              )
+            changeFontColor("white", "white", "white")
+            break;
+          }
+          case 'Clear': {
+            changeBackgroundColor(
+              "linear-gradient(#69545b, #9a6763, #f69358)",
+              "#785f67", 
+              "#785f67"
+              )
+            changeFontColor("white", "white", "white")
+            break;
+          }
+          default:{
+            changeBackgroundColor(
+              "linear-gradient(#766e3f, #a69e70, #b6b9a3)",
+              "#5e5832", 
+              "#6e673a"
+              )
+            changeFontColor("white", "white", "white")
+            break;
+          }
+        };
 
     })
 }
+//Entry point
 SthlmTemp('Stockholm')
 selectCity.addEventListener('change', () => {
   forecast.innerHTML = '';

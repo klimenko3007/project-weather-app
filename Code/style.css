@@ -10,6 +10,9 @@
     font-size: 16px;
     width: 150px;
 }
+.select-city:focus {
+    outline:rgb(150, 148, 148);
+}
 .headline{
     margin-top: 0;
 
@@ -39,7 +42,21 @@
 .current-icon{
     width: 150px;
     margin: 0 -10px 0 0;
+    position: relative;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
+    
+@keyframes bounce {
+    0%   {left:0px; top:0px;}
+    50%  {left:0px; top:10px;}
+    100% {left:0px; top:0px;}
+}
+
 .min-max {
     display: flex;
     justify-content: space-around;
@@ -69,7 +86,7 @@
 
 .forecast-list {
     width: 100%;
-    margin: 40px 0 20px;
+    padding: 40px 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,6 +103,9 @@
 .five-text{
     align-self: center;
 }
+.day {
+    justify-self: self-end;
+}
 
 .five-icon  {
     justify-self: center;
@@ -93,4 +113,47 @@
 }
 .night {
     color:  rgb(150, 148, 148);
+    justify-self: self-end;
+}
+@media (min-width: 658px) {
+    .body {
+        display: flex;
+        justify-content: center;
+    }
+    .city-forecast-wrapper {
+        display: flex;
+        flex-direction: column;
+        border: solid #fff 1px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        width: 60%;
+        height: 800px;
+    }
+    .forecast-line{
+        font-size: 25px;
+    }
+    .five-icon {
+        width: 50px;
+    }
+    .min-max {
+        font-size: 20px;
+    }
+    .sun-wrapper{
+        font-size: 20px;
+    }    
+}
+
+@media (min-width: 1028px) {
+    .forecast-line{
+        font-size: 30px;
+    }
+    .five-icon {
+        width: 55px;
+    }
+    .min-max {
+        font-size: 25px;
+    }
+    .sun-wrapper{
+        font-size: 25px;
+    }  
 }
